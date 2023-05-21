@@ -1,0 +1,15 @@
+{
+  "name": "note-app",
+  "version": "0.1.0",
+  "description": "aplikasi buat menaruh semua catatan kamu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind-start-build": "npx tailwindcss -i ./input/tailwind.css -o ./source/css/style.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
+}

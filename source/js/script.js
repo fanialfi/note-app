@@ -24,6 +24,13 @@ submitBtn.addEventListener("click", function () {
     saveContent.prepend(dataBaru);
 
     resetDataDom(judulNote, contentNote);
+
+    // menambahkan fungsi penghapusan langsung
+    const deleteButton = dataBaru.lastElementChild;
+    deleteButton.addEventListener("click", function () {
+      deleteElement(judul.textContent);
+      dataBaru.remove();
+    });
   } else {
     alert("lengkapi data terlebih dahulu");
   }
@@ -44,26 +51,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const h1 = createElement("h3", heading);
       const p = createElement("p", paragraf);
       const dataBaru = saveElement(h1, p);
+
+      // menambahkan fungsi penghapusan langsung
+      const deleteButton = dataBaru.lastElementChild;
+      deleteButton.addEventListener("click", function () {
+        deleteElement(heading);
+        dataBaru.remove();
+      });
+
+      // memasukkan element ke dom
       saveContent.prepend(dataBaru);
     });
   }
 });
 
 // menghapus content dari dom dan localStorage ketika tombol delete ditekan
-window.addEventListener("load", function () {
-  const box = document.querySelectorAll(".box");
-  box.forEach((element) => {
-    const button = element.lastElementChild;
-    const dataJudulNote = element.firstElementChild.textContent;
-
-    button.addEventListener("click", function () {
-      try {
-        console.log("OK");
-        syncLocalStorage.sync("DELETE", dataJudulNote);
-        element.remove();
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  });
-});
+function deleteElement(dataTrue) {
+  try {
+    syncLocalStorage.sync("DELETE", dataTrue);
+    dataBaru.remove();
+  } catch (error) {
+    console.log(error);
+  }
+  return;
+}
